@@ -1,28 +1,42 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+const App = () => {
+  const [drawing, setDrawing] = useState(false)
+  const ref = React.createRef()
+  const canvasStyle = {
+    border: '1px solid black',
+    cursor: 'crosshair'
   }
+  const handleMouseDown = () => {
+    setDrawing(true)
+  }
+  const handleMouseUp = () => {
+    setDrawing(false)
+  }
+  const handleMouseMove = (event) => {
+    if (drawing) {
+      const xOffset = ref.current.offsetLeft
+      const yOffset = ref.current.offsetTop
+      const x = event.clientX - xOffset
+      const y = event.clientY - yOffset
+      const ctx = ref.current.getContext('2d')
+      draw(ctx, x, y)
+    }
+  }
+  const draw = (ctx, x, y) => {
+    ctx.fillStyle = 'rgb(0, 0, 200)';
+    ctx.fillRect(x, y, 5, 5)
+  }
+  return (
+    <canvas
+      style={canvasStyle}
+      ref={ref}
+      width="400"
+      height="400"
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseMove={handleMouseMove} />
+  )
 }
 
 export default App;
