@@ -6,3 +6,4 @@
 |19.3.|1|Initialize project, create repo|
 |20.3.|2.5|Experiment on HTML Canvas element|
 |21.3.|2|Implement rudimentary drawing functionality|
+|22.3.|2|Study Canvas|
