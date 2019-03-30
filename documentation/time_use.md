@@ -8,3 +8,4 @@
 |21.3.|2|Implement rudimentary drawing functionality|
 |22.3.|2|Improve drawing functionality|
 |29.3.|3|Start learning Pyramid for the backend|
+|30.3.|3|Research Cornice; extract canvas data|

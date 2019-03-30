@@ -35,6 +35,15 @@ const App = () => {
     const ctx = ref.current.getContext('2d')
     ctx.clearRect(0, 0, width, height)
   }
+  const handleSend = () => {
+    const ctx = ref.current.getContext('2d')
+    const data = ctx.getImageData(0, 0, 10, 10)
+    const values = data.data.filter((el, ind) => ind % 4 === 3)
+    console.log('you clicked send');
+    console.log(`image data matrix has width ${data.width}`)
+    console.log(`image data matrix has height ${data.height}`)
+    console.log(values)
+  }
   return (
     <div>
       <canvas
@@ -46,6 +55,7 @@ const App = () => {
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove} />
       <button onClick={handleClear} >Clear</button>
+      <button onClick={handleSend} >Send</button>
     </div>
   )
 }
