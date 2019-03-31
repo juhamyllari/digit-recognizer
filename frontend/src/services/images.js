@@ -1,9 +1,10 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/images'
+const url = 'http://localhost:3000/images/img'
 
-const send = image => {
+const send = (image, width, height) => {
+  console.log(`sending image, image is ${image}`)
   return axios
-    .post(image)
+    .post(url, { image: image, width, height })
     .then(res => res.data)
 }
 

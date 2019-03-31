@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import imageService from './services/images'
 
 const App = () => {
   const width = 400
@@ -37,12 +38,16 @@ const App = () => {
   }
   const handleSend = () => {
     const ctx = ref.current.getContext('2d')
-    const data = ctx.getImageData(0, 0, 10, 10)
-    const values = data.data.filter((el, ind) => ind % 4 === 3)
-    console.log('you clicked send');
-    console.log(`image data matrix has width ${data.width}`)
-    console.log(`image data matrix has height ${data.height}`)
-    console.log(values)
+    const imageData = ctx.getImageData(0, 0, 10, 10)
+    const values = Array.prototype.slice.call(imageData.data)
+      .filter((el, ind) => ind % 4 === 3)
+    const width = imageData.width
+    const height = imageData.height
+    imageService
+      .send(values, width, height)
+      .then(res => {
+        console.log(`got response ${JSON.stringify(res)}`)
+      })
   }
   return (
     <div>
