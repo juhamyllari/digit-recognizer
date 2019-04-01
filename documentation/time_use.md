@@ -10,3 +10,4 @@
 |29.3.|3|Start learning Pyramid for the backend|
 |30.3.|3|Research Cornice; extract canvas data|
 |31.3.|4|Create rudimentary backend; send image data to backend|
+|1.4.|4.5|Switch to Flask backend|
