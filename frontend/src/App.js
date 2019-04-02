@@ -2,27 +2,39 @@ import React, { useState } from 'react';
 import imageService from './services/images'
 
 const App = () => {
-  const width = 400
-  const height = 400
+  const width = 28*8 // MNIST images are of size 28*28
+  const height = 28*8
+  const smallWidth = 28
+  const smallHeight = 28
   const [drawing, setDrawing] = useState(false)
-  const ref = React.createRef()
-  const canvasStyle = {
+  const refLarge = React.createRef()
+  const refSmall = React.createRef()
+  const largeCanvasStyle = {
     border: '1px solid black',
     cursor: 'crosshair'
+  }
+  const smallCanvasStyle = {
+    border: '1px solid black'
   }
   const handleMouseDown = () => {
     setDrawing(true)
   }
   const handleMouseUp = () => {
     setDrawing(false)
+    redrawSmall()
+  }
+  const redrawSmall = () => {
+    const ctx = refSmall.current.getContext('2d')
+    ctx.clearRect(0, 0, smallWidth, smallHeight)
+    ctx.drawImage(refLarge.current, 0, 0, smallWidth, smallHeight)
   }
   const handleMouseMove = (event) => {
     if (drawing) {
-      const xOffset = ref.current.offsetLeft
-      const yOffset = ref.current.offsetTop
+      const xOffset = refLarge.current.offsetLeft
+      const yOffset = refLarge.current.offsetTop
       const x = event.clientX - xOffset
       const y = event.clientY - yOffset
-      const ctx = ref.current.getContext('2d')
+      const ctx = refLarge.current.getContext('2d')
       draw(ctx, x, y)
     }
   }
@@ -33,18 +45,17 @@ const App = () => {
     ctx.fill()
   }
   const handleClear = () => {
-    const ctx = ref.current.getContext('2d')
-    ctx.clearRect(0, 0, width, height)
+    refLarge.current.getContext('2d').clearRect(0, 0, width, height)
+    refSmall.current.getContext('2d').clearRect(0, 0, smallWidth, smallHeight)
   }
   const handleSend = () => {
-    const ctx = ref.current.getContext('2d')
-    const imageData = ctx.getImageData(0, 0, 10, 10)
+    redrawSmall()
+    const ctx = refSmall.current.getContext('2d')
+    const imageData = ctx.getImageData(0, 0, smallWidth, smallHeight)
     const values = Array.prototype.slice.call(imageData.data)
       .filter((el, ind) => ind % 4 === 3)
-    const width = imageData.width
-    const height = imageData.height
     imageService
-      .send(values, width, height)
+      .send(values, smallWidth, smallHeight)
       .then(res => {
         console.log(`got response ${JSON.stringify(res)}`)
       })
@@ -52,15 +63,23 @@ const App = () => {
   return (
     <div>
       <canvas
-        style={canvasStyle}
-        ref={ref}
+        style={largeCanvasStyle}
+        ref={refLarge}
         width={width}
         height={height}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove} />
+      <br />
       <button onClick={handleClear} >Clear</button>
       <button onClick={handleSend} >Send</button>
+      <br />
+      <canvas
+        style={smallCanvasStyle}
+        ref={refSmall}
+        width={28}
+        height={28}
+        />
     </div>
   )
 }
