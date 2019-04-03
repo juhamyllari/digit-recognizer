@@ -12,3 +12,4 @@
 |31.3.|4|Create rudimentary backend; send image data to backend|
 |1.4.|4.5|Switch to Flask backend|
 |2.4.|3|Get data from MNIST size canvas; receive on backend|
+|3.4.|3|Train CNN; use CNN in backend|

@@ -1,6 +1,9 @@
 from flask import Flask, request, render_template, jsonify
+from predict import Predictor
+
 app = Flask(__name__, static_folder='frontend/build/static', template_folder='frontend/build')
 app.logger_name = "flask.app"
+predictor = Predictor('simple-mnist-cnn.h5')
 
 @app.route('/')
 def frontend():
@@ -15,8 +18,8 @@ def putimage():
   print('this is route /api')
   return jsonify(
     {
-      'backend_says': 'hello_there_frontend',
       'width': width,
-      'height': height
+      'height': height,
+      'prediction': predictor.predict(image)
     })
 
