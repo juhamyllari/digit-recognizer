@@ -16,10 +16,12 @@ def putimage():
   width = data['width']
   height = data['height']
   print('this is route /api')
+  mostlikely, probabilities = predictor.predict(image)
   return jsonify(
     {
       'width': width,
       'height': height,
-      'prediction': predictor.predict(image)
+      'mostlikely': mostlikely,
+      'probabilities': probabilities
     })
 
