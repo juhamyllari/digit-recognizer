@@ -5,7 +5,7 @@ import Results from './components/Results'
 const App = () => {
   const [probabilities, setProbabilities] = useState(null)
   return (
-    <div>
+    <div className="container">
       <DrawingCanvas setProbabilities={setProbabilities} />
       { probabilities && <Results probabilities={probabilities} /> }
     </div>

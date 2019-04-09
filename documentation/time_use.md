@@ -14,3 +14,4 @@
 |2.4.|3|Get data from MNIST size canvas; receive on backend|
 |3.4.|3|Train CNN; use CNN in backend|
 |7.4.|2|Display digit probabilities|
+|9.4.|.5|Use Bootstrap|

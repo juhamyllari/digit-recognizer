@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Button } from 'react-bootstrap'
 import imageService from '../services/images'
 
 const DrawingCanvas = ({ setProbabilities }) => {
@@ -63,24 +64,26 @@ const DrawingCanvas = ({ setProbabilities }) => {
   }
   return(
     <div>
-    <canvas
-      style={largeCanvasStyle}
-      ref={refLarge}
-      width={width}
-      height={height}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      onMouseMove={handleMouseMove} />
-    <br />
-    <button onClick={handleClear} >Clear</button>
-    <button onClick={handleSend} >Send</button>
-    <br />
-    <canvas
-      style={smallCanvasStyle}
-      ref={refSmall}
-      width={28}
-      height={28}
-      />
+      <h2>Draw your digit here</h2>
+      <canvas
+        style={largeCanvasStyle}
+        ref={refLarge}
+        width={width}
+        height={height}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove} />
+      <br />
+      <Button onClick={handleClear} >Clear</Button>
+      <Button onClick={handleSend} >Send</Button>
+      <br />
+      <h3>Your digit in MNIST size (28×28 pixels)</h3>
+      <canvas
+        style={smallCanvasStyle}
+        ref={refSmall}
+        width={28}
+        height={28}
+        />
   </div>
   )
 }
