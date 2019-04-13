@@ -1,5 +1,8 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, abort
 from predict import Predictor
+
+expected_width = 28
+expected_height = 28
 
 app = Flask(__name__, static_folder='frontend/build/static', template_folder='frontend/build')
 app.logger_name = "flask.app"
@@ -15,13 +18,16 @@ def putimage():
   image = data['image']
   width = data['width']
   height = data['height']
+  if width != expected_width or \
+    height != expected_height or \
+    len(image) != width * height:
+    abort(400)
   print('this is route /api')
-  mostlikely, probabilities = predictor.predict(image)
+  probabilities = predictor.predict(image)
   return jsonify(
     {
       'width': width,
       'height': height,
-      'mostlikely': mostlikely,
       'probabilities': probabilities
     })
 

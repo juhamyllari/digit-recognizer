@@ -15,3 +15,4 @@
 |3.4.|3|Train CNN; use CNN in backend|
 |7.4.|2|Display digit probabilities|
 |9.4.|.5|Use Bootstrap|
+|13.4.|2|Draw probability bars|

@@ -10,4 +10,4 @@ class Predictor:
     arr = np.array(img).reshape(1, 28, 28, 1).astype('float32') / 255
     prediction = self.model.predict(arr, batch_size=1)[0]
     print("prediction:", prediction)
-    return int(prediction.argmax()), prediction.tolist()
+    return prediction.tolist()
