@@ -8,10 +8,10 @@ const Result = ({ number, probability, predicted }) => {
     <>
       <svg width="200" height="30" y={y}>
         <g>
-          <rect width={100} height="20" style={{stroke: 'black', strokeWidth: '1px', fill: 'white'}} x="20" />
-          <rect width={percentage} height="20" style={{fill: 'purple'}} x="20" />
+          <rect width={100} height="20" style={{stroke: 'black', strokeWidth: '1px', fill: 'white'}} x="20" rx="3" ry="3"/>
+          <rect width={percentage} height="20" style={{fill: '#0033FF'}} x="20" rx="3" ry="3"/>
           <text fill="black" x="0" y="15">{number}</text>
-          <text fill="red" x="130" y="15">{percentageString}</text>
+          <text fill="black" x="130" y="15">{percentageString}</text>
         </g>
       </svg>
     </>
@@ -34,13 +34,13 @@ const Results = ({ probabilities }) => {
   const predicted = argmax(probabilities)
 
   return(
-    <>
-      <p>The number you drew is {predicted}.</p>
+    <div className="col" style={{margin: "20px"}}>
+      <h3>The digit you drew is {predicted}.</h3>
       <svg width="250" height="600" >
       {probabilities.map((p, ind) => 
         <Result key={ind} number={ind} probability={p} predicted={ind === predicted} />) }
       </svg>
-    </>
+    </div>
   )
 }
 

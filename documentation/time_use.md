@@ -16,3 +16,4 @@
 |7.4.|2|Display digit probabilities|
 |9.4.|.5|Use Bootstrap|
 |13.4.|2|Draw probability bars|
+|14.4.|1|Column layout|

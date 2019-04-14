@@ -6,8 +6,10 @@ const App = () => {
   const [probabilities, setProbabilities] = useState(null)
   return (
     <div className="container">
-      <DrawingCanvas setProbabilities={setProbabilities} />
-      { probabilities && <Results probabilities={probabilities} /> }
+      <div className="row">
+        <DrawingCanvas setProbabilities={setProbabilities} />
+        { probabilities && <Results probabilities={probabilities} /> }
+      </div>
     </div>
   )
 }

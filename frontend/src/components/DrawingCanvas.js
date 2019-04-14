@@ -15,7 +15,8 @@ const DrawingCanvas = ({ setProbabilities }) => {
     cursor: 'crosshair'
   }
   const smallCanvasStyle = {
-    border: '1px solid black'
+    border: '1px solid black',
+    margin: '5px'
   }
   const handleMouseDown = () => {
     setDrawing(true)
@@ -31,11 +32,15 @@ const DrawingCanvas = ({ setProbabilities }) => {
   }
   const handleMouseMove = (event) => {
     if (drawing) {
-      const xOffset = refLarge.current.offsetLeft
-      const yOffset = refLarge.current.offsetTop
+      const rect = refLarge.current.getBoundingClientRect();
+      const xOffset = rect.left
+      const yOffset = rect.top
+      // const x = event.clientX
+      // const y = event.clientY
       const x = event.clientX - xOffset
       const y = event.clientY - yOffset
       const ctx = refLarge.current.getContext('2d')
+      // console.log(`(${x}, ${y})`)
       draw(ctx, x, y)
     }
   }
@@ -63,8 +68,8 @@ const DrawingCanvas = ({ setProbabilities }) => {
       })
   }
   return(
-    <div>
-      <h2>Draw your digit here</h2>
+    <div className="col" style={{margin: "20px"}} >
+      <h2>Draw your digit (0–9) here</h2>
       <canvas
         style={largeCanvasStyle}
         ref={refLarge}
@@ -77,13 +82,13 @@ const DrawingCanvas = ({ setProbabilities }) => {
       <Button onClick={handleClear} >Clear</Button>
       <Button onClick={handleSend} >Send</Button>
       <br />
-      <h3>Your digit in MNIST size (28×28 pixels)</h3>
       <canvas
         style={smallCanvasStyle}
         ref={refSmall}
         width={28}
         height={28}
         />
+      <p>Your digit in MNIST size (28×28 pixels)</p>
   </div>
   )
 }
