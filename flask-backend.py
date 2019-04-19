@@ -4,7 +4,7 @@ from predict import Predictor
 expected_width = 28
 expected_height = 28
 
-app = Flask(__name__, static_folder='frontend/build/static', template_folder='frontend/build')
+app = Flask(__name__, template_folder='build', static_folder='build/static')
 app.logger_name = "flask.app"
 predictor = Predictor('simple-mnist-cnn.h5')
 
