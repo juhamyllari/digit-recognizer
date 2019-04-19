@@ -63,7 +63,7 @@ const DrawingCanvas = ({ setProbabilities }) => {
     imageService
       .send(values, smallWidth, smallHeight)
       .then(res => {
-        console.log(`got response ${JSON.stringify(res)}`)
+        // console.log(`got response ${JSON.stringify(res)}`)
         setProbabilities(res.probabilities)
       })
   }
