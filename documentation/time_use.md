@@ -17,3 +17,5 @@
 |9.4.|.5|Use Bootstrap|
 |13.4.|2|Draw probability bars|
 |14.4.|1|Column layout|
+|19.4.|2|Deploy to Heroku|
+|14.4.|1|Try model trained with augmented data|
