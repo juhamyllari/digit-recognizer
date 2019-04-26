@@ -7,7 +7,8 @@ expected_height = 28
 app = Flask(__name__, template_folder='build', static_folder='build/static')
 app.logger_name = "flask.app"
 # predictor = Predictor('simple-mnist-cnn.h5')
-predictor = Predictor('augmented-mnist-cnn.h5')
+# predictor = Predictor('augmented-mnist-cnn.h5')
+predictor = Predictor('augmented2-mnist-cnn.h5')
 
 @app.route('/')
 def frontend():

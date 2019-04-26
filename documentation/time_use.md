@@ -19,3 +19,6 @@
 |14.4.|1|Column layout|
 |19.4.|2|Deploy to Heroku|
 |14.4.|1|Try model trained with augmented data|
+|25.4.|1|Train model with better augmentation|
+|26.4.|.5|Use new model|
+
