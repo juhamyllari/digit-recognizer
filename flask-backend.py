@@ -9,6 +9,7 @@ app.logger_name = "flask.app"
 # predictor = Predictor('simple-mnist-cnn.h5')
 # predictor = Predictor('augmented-mnist-cnn.h5')
 predictor = Predictor('augmented2-mnist-cnn.h5')
+# predictor = Predictor('regularized-no-pooling.h5')
 
 @app.route('/')
 def frontend():
