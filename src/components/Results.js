@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { Button } from 'react-bootstrap'
 
 const Result = ({ number, probability, predicted }) => {
   const percentage = probability * 100
@@ -18,7 +19,19 @@ const Result = ({ number, probability, predicted }) => {
   )
 }
 
-const Results = ({ probabilities }) => {
+const Results = ({ probabilities, setProbabilities, drawnImage}) => {
+
+  useEffect(() => {
+    const refCanvas = document.getElementById("canvas")
+    const ctx = refCanvas.getContext('2d')
+    ctx.drawImage(drawnImage, 0, 0)
+  }, [])
+
+  const largeCanvasStyle = {
+    border: '1px solid black',
+    cursor: 'crosshair'
+  }
+
   const argmax = (arr) => {
     var max = 0
     var index = 0
@@ -30,16 +43,26 @@ const Results = ({ probabilities }) => {
     })
     return index
   }
-
+  
   const predicted = argmax(probabilities)
+  const handleOk = () => {
+    setProbabilities(null)
+  }
+
 
   return(
-    <div className="col" style={{margin: "20px"}}>
-      <h3>The digit you drew looks like a {predicted}.</h3>
-      <svg width="250" height="600" >
-      {probabilities.map((p, ind) => 
-        <Result key={ind} number={ind} probability={p} predicted={ind === predicted} />) }
-      </svg>
+    <div className="row">
+      <div className="col-sm" style={{margin: "10px"}}>
+        <h3>The digit you drew looks like a {predicted}.</h3>
+        <canvas id="canvas" style={largeCanvasStyle} height="224" width="224"/>
+      </div>
+      <div className="col-sm" style={{margin: "10px"}}>
+        <svg width="210" height="600" >
+        {probabilities.map((p, ind) => 
+          <Result key={ind} number={ind} probability={p} predicted={ind === predicted} />) }
+        </svg>
+        <Button onClick={handleOk} >Ok</Button>
+      </div>
     </div>
   )
 }

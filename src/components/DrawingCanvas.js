@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import imageService from '../services/images'
 
-const DrawingCanvas = ({ setProbabilities }) => {
+const DrawingCanvas = ({ setProbabilities, setDrawnImage }) => {
   const width = 28*8 // MNIST images are of size 28*28
   const height = 28*8
   const smallWidth = 28
@@ -35,12 +35,9 @@ const DrawingCanvas = ({ setProbabilities }) => {
       const rect = refLarge.current.getBoundingClientRect();
       const xOffset = rect.left
       const yOffset = rect.top
-      // const x = event.clientX
-      // const y = event.clientY
       const x = event.clientX - xOffset
       const y = event.clientY - yOffset
       const ctx = refLarge.current.getContext('2d')
-      // console.log(`(${x}, ${y})`)
       draw(ctx, x, y)
     }
   }
@@ -52,7 +49,7 @@ const DrawingCanvas = ({ setProbabilities }) => {
   }
   const handleClear = () => {
     refLarge.current.getContext('2d').clearRect(0, 0, width, height)
-    refSmall.current.getContext('2d').clearRect(0, 0, smallWidth, smallHeight)
+    redrawSmall()
     setProbabilities(null)
   }
   const handleSend = () => {
@@ -69,6 +66,7 @@ const DrawingCanvas = ({ setProbabilities }) => {
       .then(res => {
         setProbabilities(res.probabilities)
       })
+    setDrawnImage(refLarge.current)
   }
   return(
     <div className="col" style={{margin: "20px"}} >

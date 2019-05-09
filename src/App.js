@@ -4,12 +4,21 @@ import Results from './components/Results'
 
 const App = () => {
   const [probabilities, setProbabilities] = useState(null)
+  const [drawnImage, setDrawnImage] = useState(null)
   return (
     <div className="container">
-      <div className="row">
-        <DrawingCanvas setProbabilities={setProbabilities} />
-        { probabilities && <Results probabilities={probabilities} /> }
-      </div>
+        {
+          !probabilities ? (
+            <DrawingCanvas
+                setProbabilities={setProbabilities}
+                setDrawnImage={setDrawnImage} />
+          ) : (
+            <Results
+                probabilities={probabilities}
+                setProbabilities={setProbabilities}
+                drawnImage={drawnImage} />
+          )
+        }
     </div>
   )
 }
