@@ -35,7 +35,7 @@ const Results = ({ probabilities }) => {
 
   return(
     <div className="col" style={{margin: "20px"}}>
-      <h3>The digit you drew is {predicted}.</h3>
+      <h3>The digit you drew looks like a {predicted}.</h3>
       <svg width="250" height="600" >
       {probabilities.map((p, ind) => 
         <Result key={ind} number={ind} probability={p} predicted={ind === predicted} />) }

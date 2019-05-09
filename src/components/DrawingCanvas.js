@@ -53,6 +53,7 @@ const DrawingCanvas = ({ setProbabilities }) => {
   const handleClear = () => {
     refLarge.current.getContext('2d').clearRect(0, 0, width, height)
     refSmall.current.getContext('2d').clearRect(0, 0, smallWidth, smallHeight)
+    setProbabilities(null)
   }
   const handleSend = () => {
     redrawSmall()
@@ -60,10 +61,12 @@ const DrawingCanvas = ({ setProbabilities }) => {
     const imageData = ctx.getImageData(0, 0, smallWidth, smallHeight)
     const values = Array.prototype.slice.call(imageData.data)
       .filter((el, ind) => ind % 4 === 3)
+    if (values.every( val => val === 0)) {
+      return
+    }
     imageService
       .send(values, smallWidth, smallHeight)
       .then(res => {
-        // console.log(`got response ${JSON.stringify(res)}`)
         setProbabilities(res.probabilities)
       })
   }
@@ -77,7 +80,8 @@ const DrawingCanvas = ({ setProbabilities }) => {
         height={height}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
-        onMouseMove={handleMouseMove} />
+        onMouseMove={handleMouseMove}
+        onMouseOut={() => setDrawing(false)} />
       <br />
       <Button onClick={handleClear} >Clear</Button>
       <Button onClick={handleSend} >Send</Button>

@@ -21,4 +21,7 @@
 |14.4.|1|Try model trained with augmented data|
 |25.4.|1|Train model with better augmentation|
 |26.4.|.5|Use new model|
+|7.5.|2|Explore custom regularization|
+|8.5.|2|Train regularized model|
+|9.5.|1|Try (but do not adopt) regularized model|
 
