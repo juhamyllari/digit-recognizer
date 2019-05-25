@@ -25,4 +25,5 @@
 |6.5.|2|Train regularized model|
 |7.5.|1|Try (but do not adopt) regularized model|
 |9.5.|2.5|Put results on a separate view|
+|25.5.|2.5|Lay groundwork for database use|
 
