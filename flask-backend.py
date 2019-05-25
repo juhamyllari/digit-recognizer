@@ -15,7 +15,7 @@ predictor = Predictor('augmented2-mnist-cnn.h5')
 def frontend():
   return render_template('index.html')
 
-@app.route('/api', methods=['POST'])
+@app.route('/api/model', methods=['POST'])
 def putimage():
   data = request.get_json()
   image = data['image']

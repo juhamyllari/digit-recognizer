@@ -1,12 +1,17 @@
 import axios from 'axios'
 // const url = 'http://localhost:3000/api'
-const url = '/api'
+const baseUrl = '/api'
 
-const send = (image, width, height) => {
+const sendToModel = (image, width, height) => {
   // console.log(`sending image, image is ${image}`)
   return axios
-    .post(url, { image, width, height })
+    .post(`${baseUrl}/model`, { image, width, height })
     .then(res => res.data)
 }
 
-export default { send }
+const saveToDatabase = (image, guess, groundTruth) => {
+  return axios
+    .post(`${baseUrl}/db`, { image, guess, groundTruth })
+}
+
+export default { sendToModel, saveToDatabase }

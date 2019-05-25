@@ -57,11 +57,15 @@ const Results = ({ probabilities, setProbabilities, drawnImage}) => {
         <canvas id="canvas" style={largeCanvasStyle} height="224" width="224"/>
       </div>
       <div className="col-sm" style={{margin: "10px"}}>
-        <svg width="210" height="600" >
+        <p>Did we get it right? Please select the correct digit and press ok.</p>
+        <svg width="210" height="310" >
         {probabilities.map((p, ind) => 
           <Result key={ind} number={ind} probability={p} predicted={ind === predicted} />) }
         </svg>
-        <Button onClick={handleOk} >Ok</Button>
+        <div>
+          <Button onClick={handleOk} >Ok</Button>
+          <Button onClick={handleOk} >Cancel</Button>
+        </div>
       </div>
     </div>
   )

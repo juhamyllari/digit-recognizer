@@ -62,7 +62,7 @@ const DrawingCanvas = ({ setProbabilities, setDrawnImage }) => {
       return
     }
     imageService
-      .send(values, smallWidth, smallHeight)
+      .sendToModel(values, smallWidth, smallHeight)
       .then(res => {
         setProbabilities(res.probabilities)
       })
