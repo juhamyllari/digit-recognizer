@@ -10,9 +10,14 @@ expected_height = 28
 app = Flask(__name__, template_folder='build', static_folder='build/static')
 app.logger_name = "flask.app"
 
-config = ConfigParser()
-config.read('db.conf')
-client = MongoClient(config['DB']['db_uri'])
+if os.environ.get('ENVIRONMENT') == 'PRODUCTION':
+  db_uri = os.environ.get('DB_URI')
+else:
+  print('Environment is not production, reading db uri from file')
+  config = ConfigParser()
+  config.read('db.conf')
+  db_uri = config['DB']['db_uri']
+client = MongoClient(db_uri)
 db = client.digit_db
 digits = db.digits
 
