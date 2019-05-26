@@ -1,15 +1,22 @@
+import os
 from flask import Flask, request, render_template, jsonify, abort
 from predict import Predictor
+from pymongo import MongoClient
+from configparser import ConfigParser
 
 expected_width = 28
 expected_height = 28
 
 app = Flask(__name__, template_folder='build', static_folder='build/static')
 app.logger_name = "flask.app"
-# predictor = Predictor('simple-mnist-cnn.h5')
-# predictor = Predictor('augmented-mnist-cnn.h5')
+
+config = ConfigParser()
+config.read('db.conf')
+client = MongoClient(config['DB']['db_uri'])
+db = client.digit_db
+digits = db.digits
+
 predictor = Predictor('augmented2-mnist-cnn.h5')
-# predictor = Predictor('regularized-no-pooling.h5')
 
 @app.route('/')
 def frontend():
@@ -25,7 +32,6 @@ def putimage():
     height != expected_height or \
     len(image) != width * height:
     abort(400)
-  print('this is route /api')
   probabilities = predictor.predict(image)
   return jsonify(
     {
@@ -34,3 +40,16 @@ def putimage():
       'probabilities': probabilities
     })
 
+@app.route('/api/db', methods=['POST'])
+def saveimage():
+  data = request.get_json()
+  image = data['image']
+  guess = data['guess']
+  ground_truth = data['groundTruth']
+  if len(image) != expected_height * expected_width:
+    abort(400)
+  digit_document = {"image": image,
+                    "guess": guess,
+                    "ground_truth": ground_truth}
+  digit_id = digits.insert_one(digit_document).inserted_id
+  return f"stored as {digit_id}"

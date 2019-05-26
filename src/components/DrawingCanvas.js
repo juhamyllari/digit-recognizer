@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import imageService from '../services/images'
 
-const DrawingCanvas = ({ setProbabilities, setDrawnImage }) => {
+const DrawingCanvas = ({ setProbabilities, setLargeImage, setImageValues }) => {
   const width = 28*8 // MNIST images are of size 28*28
   const height = 28*8
   const smallWidth = 28
@@ -66,7 +66,8 @@ const DrawingCanvas = ({ setProbabilities, setDrawnImage }) => {
       .then(res => {
         setProbabilities(res.probabilities)
       })
-    setDrawnImage(refLarge.current)
+    setLargeImage(refLarge.current)
+    setImageValues(values)
   }
   return(
     <div className="col" style={{margin: "20px"}} >
