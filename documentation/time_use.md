@@ -27,6 +27,6 @@
 |9.5.|2.5|Put results on a separate view|
 |25.5.|2.5|Lay groundwork for database use|
 |26.5.|5|Save results to database|
-|30.5.|1|Create favicon; update README|
+|30.5.|2|Create favicon; update documentation|
 
-Total time used: 54.5 hours
+Total time used: 55.5 hours
