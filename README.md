@@ -8,4 +8,6 @@ The app is running (at least some of the time) on Heroku [here](https://digit-re
 Digit Recognizer is a React app with a Python Flask backend. The backend uses a convolutional neural network implemented and trained in Keras.
 
 ## Documentation
-[Time use](https://github.com/juhamyllari/digit-recognizer/blob/master/documentation/time_use.md)
+[Using Digit Recognizer](https://github.com/juhamyllari/digit-recognizer/blob/master/documentation/usage.md)
+
+[Project time use](https://github.com/juhamyllari/digit-recognizer/blob/master/documentation/time_use.md)
