@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, render_template, jsonify, abort
+from flask import Flask, request, render_template, jsonify, abort, send_from_directory
 from predict import Predictor
 from pymongo import MongoClient
 from configparser import ConfigParser
@@ -58,3 +58,8 @@ def saveimage():
                     "ground_truth": ground_truth}
   digit_id = digits.insert_one(digit_document).inserted_id
   return f"stored as {digit_id}"
+
+@app.route('/favicon.ico')
+def favicon():
+  print("this is route favicon")
+  return send_from_directory('', 'favicon.ico')
