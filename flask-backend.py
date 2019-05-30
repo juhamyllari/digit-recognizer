@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, render_template, jsonify, abort, send_from_directory
+from flask import Flask, request, render_template, jsonify, abort, send_from_directory, url_for
 from predict import Predictor
 from pymongo import MongoClient
 from configparser import ConfigParser
@@ -62,4 +62,4 @@ def saveimage():
 @app.route('/favicon.ico')
 def favicon():
   print("this is route favicon")
-  return send_from_directory('', 'favicon.ico')
+  return send_from_directory('static', 'favicon.ico')
