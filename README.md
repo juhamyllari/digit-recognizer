@@ -1,5 +1,5 @@
 # Digit Recognizer
-Digit Recognizer is a web application that identifies hand written digits. The user has the option of telling Digit Recognizer whether the digit was correctly identified, in which case the information is saved in a database.
+Digit Recognizer is a web application that identifies hand written digits. The user has the option of telling Digit Recognizer whether the digit was correctly identified. The information is saved in a database.
 
 ## Live on the Web
 The app is running (at least some of the time) on Heroku [here](https://digit-reader.herokuapp.com/).
