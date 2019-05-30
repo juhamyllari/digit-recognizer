@@ -29,3 +29,4 @@
 |26.5.|5|Save results to database|
 |30.5.|1|Create favicon; update README|
 
+Total time used: 54.5 hours
