@@ -71,11 +71,11 @@ const Results = ({ probabilities, setProbabilities, largeImage, imageValues}) =>
   return(
     <div className="row">
       <div className="col-sm" style={{margin: "10px"}}>
-        <h3>The digit you drew looks like a {predicted}.</h3>
+        <h3>Your digit looks like {predicted === 8 ? "an" : "a"} {predicted}.</h3>
         <canvas id="canvas" style={largeCanvasStyle} height="224" width="224"/>
       </div>
       <div className="col-sm" style={{margin: "10px"}}>
-        <p>Did we get it right? Please select the correct digit and press ok.</p>
+        <p>Did we get it right? Please select the correct digit and click ok.</p>
         <svg width="210" height="310" >
         {probabilities.map((p, ind) => 
           <Result key={ind} number={ind} probability={p} selected={selected}

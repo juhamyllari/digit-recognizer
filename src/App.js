@@ -8,6 +8,7 @@ const App = () => {
   const [imageValues, setImageValues] = useState(null)
   return (
     <div className="container">
+      <h1>Digit Recognizer</h1>
         {
           !probabilities ? (
             <DrawingCanvas
